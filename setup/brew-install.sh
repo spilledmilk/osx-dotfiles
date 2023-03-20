@@ -24,8 +24,7 @@ brew_install() {
 
     # Install packages
     echo -e "\033[1;34m\n==>\033[0m \033[1mInstalling packages from txt file..."
-    brew leaves > ~/dev-dotfiles/brew-pkgs.txt
-    xargs brew install < ~/dev-dotfiles/brew-pkgs.txt
+    xargs brew install < ./brew-pkgs.txt
 
     # Check if config lines exist
     if grep -Fxq "source $(brew --prefix)/opt/spaceship/spaceship.zsh" ./.zshrc; then
