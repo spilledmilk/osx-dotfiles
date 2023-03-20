@@ -27,7 +27,7 @@ brew_install() {
     xargs brew install < ./brew-pkgs.txt
 
     # Check if config lines exist
-    if grep -Fxq "source $(brew --prefix)/opt/spaceship/spaceship.zsh" ./.zshrc; then
+    if grep -Fxq "source $(brew --prefix)/opt/spaceship/spaceship.zsh" ~/.zshrc; then
       echo "Looks good!"
     else
       echo "source $(brew --prefix)/opt/spaceship/spaceship.zsh" >>! ~/.zshrc
