@@ -8,9 +8,6 @@ sudo -v
 # Update existing `sudo` timestample until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Permissions
-chmod u+x ./setup/*.sh
-
 # MacOS
 echo -e "\033[1;33m\n*------------------------------*\033[0m"
 ./setup/mac.sh
