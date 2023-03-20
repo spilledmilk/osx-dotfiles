@@ -26,12 +26,8 @@ brew_install() {
     echo -e "\033[1;34m\n==>\033[0m \033[1mInstalling packages from txt file..."
     xargs brew install < ./brew-pkgs.txt
 
-    # Check if config lines exist
-    if grep -Fxq "source $(brew --prefix)/opt/spaceship/spaceship.zsh" ~/.zshrc; then
-      echo "Looks good!"
-    else
-      echo "source $(brew --prefix)/opt/spaceship/spaceship.zsh" >>! ~/.zshrc
-    fi
+    # nvm
+    source $(brew --prefix nvm)/nvm.sh
     
     # Nerdfonts
     brew tap homebrew/cask-fonts
