@@ -8,7 +8,9 @@ autoload -Uz compinit
 compinit -u
 
 # ZSH Syntax Highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
 
 # SLI command completion
 # source ~/sli_zsh_completer.sh
@@ -83,3 +85,6 @@ function cd() {
   builtin cd $1 && ls
 }
 autoload -Uz cd
+
+# Starship prompt
+eval "$(starship init zsh)"
