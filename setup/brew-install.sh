@@ -32,6 +32,9 @@ brew_install() {
     else
       echo "source $(brew --prefix)/opt/spaceship/spaceship.zsh" >>! ~/.zshrc
     fi
+    
+    # Nerdfonts
+    brew tap homebrew/cask-fonts
 
   else
     echo -e "\033[1;34m\n==>\033[0m \033[1mBrew error. Command not found."
