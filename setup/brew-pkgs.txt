@@ -14,7 +14,7 @@ openconnect
 pre-commit
 pyenv
 snyk/tap/snyk
-spaceship
+starship
 the_silver_searcher
 tmux
 trash
