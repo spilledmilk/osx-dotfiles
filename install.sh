@@ -14,7 +14,8 @@ echo -e "\033[1;33m\n*------------------------------*\033[0m"
 
 # Move dotfiles over
 FILES="./.zshrc
-./.gitconfig"
+./.gitconfig
+./.vimrc"
 for file in $FILES; do
   cp "$file" ~/"$file"
 done;
