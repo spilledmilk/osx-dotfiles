@@ -10,6 +10,7 @@ jpeg
 jq
 nghttp2
 node
+nvm
 openconnect
 pre-commit
 pyenv
