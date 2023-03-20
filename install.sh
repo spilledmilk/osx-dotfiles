@@ -13,8 +13,10 @@ echo -e "\033[1;33m\n*------------------------------*\033[0m"
 ./setup/mac.sh
 
 # Move dotfiles over
-for file in $execution_dir/.{zshrc,gitconfig}; do
-  execute "cp -v "$file" $HOME/"
+FILES="./.zshrc
+./.gitconfig"
+for file in $FILES; do
+  cp "$file" ~/"$file"
 done;
 unset file;
 
