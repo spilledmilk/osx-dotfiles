@@ -1,2 +1,2 @@
 ## OSX Dotfiles
-For M1 Macbook Pro
+For M1/M2 Macbook Pro
