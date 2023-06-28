@@ -12,6 +12,8 @@ brew_install() {
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/${USER}/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"  
 
+  SCRIPT_DIR="${BASH_SOURCE%/*}"
+
   if assert_cmd_exists "brew"; then
     # Complete brew setup, including installing packages
     # Update to ensure latest
@@ -24,7 +26,7 @@ brew_install() {
 
     # Install packages
     echo -e "\033[1;34m\n==>\033[0m \033[1mInstalling packages from txt file..."
-    xargs brew install < ./brew-pkgs.txt
+    xargs brew install < "$SCRIPT_DIR/brew-pkgs.txt"
 
     # nvm
     source $(brew --prefix nvm)/nvm.sh
