@@ -1,7 +1,4 @@
-# Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
-# prompt spaceship
-# source ~/.spaceshiprc.zsh
 
 # Git Autocomplete
 autoload -Uz compinit
@@ -13,7 +10,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
 
 # SLI command completion
-# source ~/sli_zsh_completer.sh
+source ~/My\ Drive/Backup/sli_zsh_completer.sh
 
 # Aliases
 alias ls='ls -la'
@@ -26,29 +23,34 @@ alias ~='cd ~'
 alias dev='cd ~/dev'
 alias work='cd ~/workspace'
 alias qa='cd ~/dev/qa-automation'
-alias auto='cd ~/dev/wl-farmers-toggle'
+alias auto='cd ~/dev/wl-toggle-auto'
 alias sdk='cd ~/dev/platform-sdk'
+alias pmail='cd ~/dev/postmark-emails'
+alias ho='cd ~/dev/wl-toggle-homeowners'
+alias pa='cd ~/dev/platform-app'
 
-alias slidev='sli dev changelog'
+alias slip='sli dev changelog -p'
 alias sdklink='yarn link-package'
 alias applink='yarn pkg:sdk:link'
 alias app-unlink='yarn pkg:sdk:unlink'
-alias sdk-unlink='yarn unlink "@sureapp/platform-sdk"'
+alias sdk-unlink='yarn unlink-package'
 alias yi='yarn install'
+alias npmlogin='npm login --registry=https://npm.pkg.github.com --scope=@sureapp'
 
 alias g='git'
 alias pull='git fetch && git pull'
 alias gr='git restore'
 alias gs='git status'
 alias gcb='git checkout -b'
+alias gbd='git branch -D'
 alias gc='git checkout'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gpo='git push origin'
 alias gmd='git merge develop'
 alias develop='git checkout develop'
-alias switch='git checkout @{-1}'
-alias clone='git clone'
+alias g-='git checkout @{-1}'
+alias gcl='git clone'
 
 alias v='vim'
 alias vz='vim ~/.zshrc'
@@ -74,10 +76,60 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+function gbs() {
+  search_branch=$1
+  git branch --list "*${search_branch}*"
+}
+
+function gcs() {
+  search_branch=$1
+  branch_options=()
+  for branch in $(gbs "$search_branch"); do
+    branch_options+=("$branch")
+  done
+  select branch in "${branch_options[@]}"; do
+    git checkout "$branch"
+    break
+done
+}
+
 function push() {
   current_branch=$(git name-rev --name-only HEAD)
   if [[ "$current_branch" != "develop" ]]; then
     git push origin $current_branch
+  fi
+}
+
+function yart() {
+  arg=$1
+  auto='wl-toggle-auto'
+  postmark='postmark-emails'
+  platformapp='platform-app'
+  if [[ $(pwd) == *"$auto"* ]]; then
+    yarn start:standalone:toggle
+  elif [[ $(pwd) == *"$auto"* && $arg == "toyota" ]]; then
+    yarn start:standalone:toyota
+  elif [[ $(pwd) == *"$postmark"* || $(pwd) == *"$platformapp"* ]]; then
+    yarn start
+  fi
+}
+
+function scaffold() {
+  product=$1
+  states=$@
+  if [[ $input == "auto" ]]; then
+    for arg in $states; do
+      touch src/auto/constants/region/toggle/${arg}.tsx
+    done
+  elif [[ $input == "tai" ]]; then
+    for arg in $states; do
+      touch src/auto/constants/region/toyota/${arg}.tsx
+    done
+  elif [[ $input == "all" ]]; then
+    for arg in $states; do
+      touch src/auto/constants/region/toggle/${arg}.tsx
+      touch src/auto/constants/region/toyota/${arg}.tsx
+    done
   fi
 }
 
@@ -86,5 +138,6 @@ function cd() {
 }
 autoload -Uz cd
 
-# Starship prompt
+# Starship
 eval "$(starship init zsh)"
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
