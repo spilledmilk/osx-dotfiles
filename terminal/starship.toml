@@ -1,0 +1,26 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# The default symbol is '❯'; alternative example: '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[❯](bold #a979e1)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[✗](bold red)'
+
+# Format directory
+[directory]
+style = 'bold cyan'
+
+# Git
+[git_branch]
+symbol = '🌱 '
+ignore_branches=['develop']
+[git_commit]
+tag_symbol='🔖 '
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
